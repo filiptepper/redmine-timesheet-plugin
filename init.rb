@@ -8,9 +8,7 @@ else
   FCSV = CSV
 end
 
-require 'dispatcher'
-Dispatcher.to_prepare :timesheet_plugin do
-
+ActionDispatch::Callbacks.to_prepare :timesheet_plugin do
   require_dependency 'principal'
   require_dependency 'user'
   User.send(:include, TimesheetPlugin::Patches::UserPatch)
@@ -25,7 +23,6 @@ Dispatcher.to_prepare :timesheet_plugin do
   end
 end
 
-
 unless Redmine::Plugin.registered_plugins.keys.include?(:timesheet_plugin)
   Redmine::Plugin.register :timesheet_plugin do
     name 'Timesheet Plugin'
@@ -36,7 +33,7 @@ unless Redmine::Plugin.registered_plugins.keys.include?(:timesheet_plugin)
 
     version '0.6.0'
     requires_redmine :version_or_higher => '0.9.0'
-    
+
     settings(:default => {
                'list_size' => '5',
                'precision' => '2',
