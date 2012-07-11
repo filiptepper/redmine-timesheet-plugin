@@ -24,11 +24,11 @@ module TimesheetPlugin
             return false unless context.allows_to?(action)
             # Admin users are authorized for anything else
             return true if admin?
-      
+
             roles = roles_for_project_with_potentially_archived_project(context)
             return false unless roles
             roles.detect {|role| (context.is_public? || role.member?) && role.allowed_to?(action)}
-            
+
           else
             allowed_to?(action, context, options)
           end
@@ -54,7 +54,7 @@ module TimesheetPlugin
           end
           roles
         end
-        
+
       end
     end
   end

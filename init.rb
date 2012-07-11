@@ -9,11 +9,11 @@ else
 end
 
 ActionDispatch::Callbacks.to_prepare do
-  require_dependency 'principal'
-  require_dependency 'user'
-  User.send(:include, TimesheetPlugin::Patches::UserPatch)
+  require_dependency "project"
+  require_dependency "principal"
+  require_dependency "user"
 
-  require_dependency 'project'
+  User.send(:include, TimesheetPlugin::Patches::UserPatch)
   Project.send(:include, TimesheetPlugin::Patches::ProjectPatch)
   # Needed for the compatibility check
   begin
