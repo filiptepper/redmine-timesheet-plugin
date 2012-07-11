@@ -8,7 +8,7 @@ else
   FCSV = CSV
 end
 
-ActionDispatch::Callbacks.to_prepare :timesheet_plugin do
+ActionDispatch::Callbacks.to_prepare do
   require_dependency 'principal'
   require_dependency 'user'
   User.send(:include, TimesheetPlugin::Patches::UserPatch)
